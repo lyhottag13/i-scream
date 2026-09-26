@@ -8,6 +8,11 @@ const MELT_RATE: float = 0.1
 
 var bar_ratio := 1.0
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
 func _process(delta: float) -> void:
 	bar_ratio -= (MELT_RATE * delta)
 	bar.set_bar(bar_ratio)
