@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c5hq0tlm542aw"]
+
+[ext_resource type="PackedScene" uid="uid://6ovtqly3375u" path="res://src/scenes/level.tscn" id="1_lt075"]
+[ext_resource type="Script" uid="uid://di1olcwguaiyx" path="res://src/scripts/main_game.gd" id="1_r3nyt"]
+[ext_resource type="PackedScene" uid="uid://bu8cjok6o02rb" path="res://src/scenes/player.tscn" id="2_r3nyt"]
+[ext_resource type="PackedScene" uid="uid://bw370bxwsfuir" path="res://bar.tscn" id="4_m7syd"]
+
+[node name="MainGame" type="Node" unique_id=723222343]
+script = ExtResource("1_r3nyt")
+
+[node name="World" type="Node2D" parent="." unique_id=60166071]
+
+[node name="Level" parent="World" unique_id=1585518691 instance=ExtResource("1_lt075")]
+
+[node name="Player" parent="World" unique_id=2135155359 instance=ExtResource("2_r3nyt")]
+
+[node name="GUI" type="Control" parent="." unique_id=166510368]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bar" parent="GUI" unique_id=1345024408 instance=ExtResource("4_m7syd")]
+layout_mode = 1
+offset_left = -10.0
+offset_right = 0.0
+
+[connection signal="collected" from="World/Level" to="." method="_on_level_collected"]
+[connection signal="hit" from="World/Player" to="." method="_on_player_hit"]

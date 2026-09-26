@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://6ovtqly3375u"]
+
+[ext_resource type="Script" uid="uid://dahsjtk3pp8id" path="res://src/scripts/level.gd" id="1_7racn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wq10o"]
+size = Vector2(1190, 47)
+
+[node name="Level" type="Node2D" unique_id=1585518691]
+script = ExtResource("1_7racn")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1034621042]
+offset_right = 646.0
+offset_bottom = 397.0
+color = Color(0.3254902, 1, 1, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=827513076]
+position = Vector2(-225, 173)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=445182400]
+position = Vector2(585, 13.5)
+shape = SubResource("RectangleShape2D_wq10o")
+
+[node name="ColorRect" type="ColorRect" parent="Floor" unique_id=1711730836]
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 1181.0
+offset_bottom = 40.0
+color = Color(1, 1, 0.47843137, 1)
+
+[node name="SpawnMarker" type="Marker2D" parent="." unique_id=1587892575]
+unique_name_in_owner = true
+position = Vector2(345, 163)
+
+[node name="Timers" type="Node" parent="." unique_id=2143350176]
+
+[node name="CactusTimer" type="Timer" parent="Timers" unique_id=955234061]
+unique_name_in_owner = true
+autostart = true
+
+[node name="IceCubeTimer" type="Timer" parent="Timers" unique_id=144561989]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="timeout" from="Timers/CactusTimer" to="." method="_on_cactus_timer_timeout"]
+[connection signal="timeout" from="Timers/IceCubeTimer" to="." method="_on_ice_cube_timer_timeout"]

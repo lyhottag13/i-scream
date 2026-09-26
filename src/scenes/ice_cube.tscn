@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dk5f5sj4fo8a1"]
+
+[ext_resource type="Script" uid="uid://bdjlo8i7ggi7j" path="res://src/scripts/ice_cube.gd" id="1_tcsfa"]
+[ext_resource type="Texture2D" uid="uid://dg7tuguj0cn8u" path="res://resources/ice_cube.png" id="2_tcsfa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcsfa"]
+size = Vector2(32, 32)
+
+[node name="IceCube" type="Area2D" unique_id=1182805861 groups=["moving_objects"]]
+collision_layer = 0
+script = ExtResource("1_tcsfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=869685326]
+texture = ExtResource("2_tcsfa")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=806318090]
+rect = Rect2(-18, -18, 36, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1517448668]
+shape = SubResource("RectangleShape2D_tcsfa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
