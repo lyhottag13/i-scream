@@ -21,11 +21,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	for object: Node2D in get_tree().get_nodes_in_group("moving_objects"):
-		object.position.x -= delta * speed
-	
-	speed += delta * 2
-	cactus_timer_minimum -= delta * 0.05
+	if GameState.game_state == GameState.GAME_STATES.RUNNING:
+		for object: Node2D in get_tree().get_nodes_in_group("moving_objects"):
+			object.position.x -= delta * speed
+		speed += delta * 2
+		cactus_timer_minimum -= delta * 0.05
 
 
 func _on_cactus_timer_timeout() -> void:
