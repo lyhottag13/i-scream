@@ -6,6 +6,9 @@ signal hit
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
+@onready var jump: AudioStreamPlayer = $Jump
+@onready var hit_sfx: AudioStreamPlayer = $HitSFX
+@onready var scream_sfx: AudioStreamPlayer = $ScreamSFX
 
 func _physics_process(delta: float) -> void:
 	
@@ -16,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		AudioManager.play("jump")
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -31,7 +35,9 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Cactus:
 		hit.emit()
+		AudioManager.play("hit")
 
 
 func die() -> void:
+	AudioManager.play("scream")
 	queue_free()

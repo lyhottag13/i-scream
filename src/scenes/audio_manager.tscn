@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bpebfgmglfbsl"]
+
+[ext_resource type="Script" uid="uid://dvauw76mjsmy0" path="res://src/scripts/audio_manager.gd" id="1_k8vh8"]
+[ext_resource type="AudioStream" uid="uid://c80qecwgsdob1" path="res://resources/sounds/hit.ogg" id="2_ikxyg"]
+[ext_resource type="AudioStream" uid="uid://df5pclditndwn" path="res://resources/sounds/chomp.ogg" id="3_0d3i6"]
+[ext_resource type="AudioStream" uid="uid://dxo4ap4pqp7h8" path="res://resources/sounds/jump.ogg" id="4_1nd4j"]
+[ext_resource type="AudioStream" uid="uid://c1dqbnkn0ur5l" path="res://resources/sounds/scream.ogg" id="5_ccaga"]
+[ext_resource type="AudioStream" uid="uid://c7fwjidh602ee" path="res://resources/sounds/ice_collect.ogg" id="6_hwudm"]
+
+[node name="AudioManager" type="Node" unique_id=1658244401]
+script = ExtResource("1_k8vh8")
+
+[node name="Hit" type="AudioStreamPlayer" parent="." unique_id=2006654701]
+stream = ExtResource("2_ikxyg")
+
+[node name="Chomp" type="AudioStreamPlayer" parent="." unique_id=488058941]
+stream = ExtResource("3_0d3i6")
+
+[node name="Jump" type="AudioStreamPlayer" parent="." unique_id=1331016305]
+stream = ExtResource("4_1nd4j")
+
+[node name="Scream" type="AudioStreamPlayer" parent="." unique_id=1795342982]
+stream = ExtResource("5_ccaga")
+
+[node name="IceCollect" type="AudioStreamPlayer" parent="." unique_id=606368234]
+stream = ExtResource("6_hwudm")

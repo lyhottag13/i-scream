@@ -11,6 +11,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq10o"]
 size = Vector2(1190, 47)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e32pt"]
+size = Vector2(20, 211)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkhm5"]
+size = Vector2(126, 206.5)
+
 [node name="Level" type="Node2D" unique_id=1585518691]
 script = ExtResource("1_7racn")
 
@@ -20,6 +26,14 @@ position = Vector2(-225, 173)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=445182400]
 position = Vector2(585, 13.5)
 shape = SubResource("RectangleShape2D_wq10o")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=1934811265]
+position = Vector2(208, -74.5)
+shape = SubResource("RectangleShape2D_e32pt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor" unique_id=219153552]
+position = Vector2(614, -81.25)
+shape = SubResource("RectangleShape2D_hkhm5")
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1587892575]
 unique_name_in_owner = true

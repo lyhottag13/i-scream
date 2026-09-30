@@ -33,3 +33,4 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(1, 0.5)
 pivot_offset_ratio = Vector2(0.5, 1)
+color = Color(0, 0.88235295, 1, 1)

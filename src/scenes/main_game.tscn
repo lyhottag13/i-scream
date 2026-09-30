@@ -4,6 +4,11 @@
 [ext_resource type="Script" uid="uid://di1olcwguaiyx" path="res://src/scripts/main_game.gd" id="1_r3nyt"]
 [ext_resource type="PackedScene" uid="uid://bu8cjok6o02rb" path="res://src/scenes/player.tscn" id="2_r3nyt"]
 [ext_resource type="PackedScene" uid="uid://bw370bxwsfuir" path="res://bar.tscn" id="4_m7syd"]
+[ext_resource type="FontFile" uid="uid://dyl1gtqc3hn47" path="res://resources/DialogueFont.otf" id="5_c5f53"]
+[ext_resource type="PackedScene" uid="uid://v1oehotvw3l0" path="res://src/scenes/game_over.tscn" id="6_wrvd8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrvd8"]
+size = Vector2(320, 180)
 
 [node name="MainGame" type="Node" unique_id=723222343]
 script = ExtResource("1_r3nyt")
@@ -13,6 +18,7 @@ script = ExtResource("1_r3nyt")
 [node name="Level" parent="World" unique_id=1585518691 instance=ExtResource("1_lt075")]
 
 [node name="Player" parent="World" unique_id=2135155359 instance=ExtResource("2_r3nyt")]
+position = Vector2(62, 164)
 
 [node name="GUI" type="Control" parent="." unique_id=166510368]
 layout_mode = 3
@@ -23,9 +29,48 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Bar" parent="GUI" unique_id=1345024408 instance=ExtResource("4_m7syd")]
+visible = false
 layout_mode = 1
-offset_left = -10.0
-offset_right = 0.0
+offset_left = -21.0
+offset_right = -11.0
+
+[node name="Score" type="Label" parent="GUI" unique_id=366462545]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 81.0
+offset_bottom = 28.0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_c5f53")
+theme_override_font_sizes/font_size = 10
+text = "Score: XX"
+
+[node name="GameOver" parent="GUI" unique_id=424931550 instance=ExtResource("6_wrvd8")]
+layout_mode = 1
+offset_top = -180.0
+offset_bottom = -180.0
+
+[node name="Tutorial" type="Label" parent="GUI" unique_id=1717902980]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 68.0
+offset_right = 522.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("5_c5f53")
+theme_override_font_sizes/font_size = 28
+text = "Collect ice!"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="GUI" unique_id=507489006]
+position = Vector2(160, 90)
+shape = SubResource("RectangleShape2D_wrvd8")
+action = "jump"
+
+[node name="ScoreTimer" type="Timer" parent="." unique_id=1679420607]
+wait_time = 0.1
 
 [connection signal="collected" from="World/Level" to="." method="_on_level_collected"]
 [connection signal="hit" from="World/Player" to="." method="_on_player_hit"]
+[connection signal="retry" from="GUI/GameOver" to="." method="_on_game_over_retry"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cw7drtbk48xxm" path="res://src/scripts/player.gd" id="1_v4rts"]
 [ext_resource type="Texture2D" uid="uid://buusbph21das7" path="res://resources/spritesheet.png" id="2_v4rts"]
+[ext_resource type="AudioStream" uid="uid://dxo4ap4pqp7h8" path="res://resources/sounds/jump.ogg" id="3_hwyk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwyk6"]
 atlas = ExtResource("2_v4rts")
@@ -96,19 +97,20 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4rts"]
-size = Vector2(12, 22)
+size = Vector2(32, 57)
 
 [node name="Player" type="CharacterBody2D" unique_id=2135155359]
 script = ExtResource("1_v4rts")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1842060911]
-scale = Vector2(0.515625, 0.515625)
+position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_wpkk7")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.6408936
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=440876128]
+position = Vector2(0, -29)
 shape = SubResource("RectangleShape2D_v4rts")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=378018722]
@@ -116,6 +118,11 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=484020901]
+position = Vector2(0, -29)
 shape = SubResource("RectangleShape2D_v4rts")
+
+[node name="Jump" type="AudioStreamPlayer" parent="." unique_id=598231984]
+stream = ExtResource("3_hwyk6")
+volume_db = -13.582
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
