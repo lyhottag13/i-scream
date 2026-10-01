@@ -6,11 +6,12 @@ signal hit
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
-@onready var jump: AudioStreamPlayer = $Jump
-@onready var hit_sfx: AudioStreamPlayer = $HitSFX
-@onready var scream_sfx: AudioStreamPlayer = $ScreamSFX
+@onready var particles: GPUParticles2D = $Particles
 
 func _physics_process(delta: float) -> void:
+	# Prevents player control if the game isn't running.
+	if GameState.game_state == GameState.GAME_STATES.NOT_RUNNING:
+		return
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -35,6 +36,8 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Cactus:
 		hit.emit()
+		particles.duplicate()
+		particles.restart()
 		AudioManager.play("hit")
 
 

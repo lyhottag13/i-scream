@@ -6,27 +6,37 @@ signal collected
 const CACTUS = preload("uid://c44a4nntknj6q")
 const ICE_CUBE = preload("uid://dk5f5sj4fo8a1")
 
-var speed = 100
-var cactus_timer_minimum = 2
-var ice_cube_timer_minimum = 1
+const BASELINE_SPEED = 100
+const BASELINE_CACTUS_TIME = 2
+const BASELINE_ICE_CUBE_TIME = 1
+const MINIMUM_CACTUS_TIME = 0.2
+const MAXIMUM_ICE_CUBE_TIME = 2
+
+var speed = BASELINE_SPEED
+var cactus_time = BASELINE_CACTUS_TIME
+var ice_cube_time = BASELINE_ICE_CUBE_TIME
 
 @onready var spawn_marker: Marker2D = %SpawnMarker
 @onready var cactus_timer: Timer = %CactusTimer
 @onready var ice_cube_timer: Timer = %IceCubeTimer
+@onready var backgrounds: Node2D = $Backgrounds
+
+var tweens: Array[Tween] = []
 
 func _physics_process(delta: float) -> void:
 	for object: Node2D in get_tree().get_nodes_in_group("moving_objects"):
 		object.position.x -= delta * speed
-	speed += delta * 2
 	if GameState.game_state == GameState.GAME_STATES.RUNNING:
-		cactus_timer_minimum -= delta * 0.05
+		speed += delta * 2
+		cactus_time = max(cactus_time - delta * 0.04, MINIMUM_CACTUS_TIME)
+		ice_cube_time = min(ice_cube_time + delta * 0.02, MAXIMUM_ICE_CUBE_TIME)
 
 
 func _on_cactus_timer_timeout() -> void:
 	var new_cactus = CACTUS.instantiate() as Cactus
 	new_cactus.position = spawn_marker.position
 	add_child(new_cactus)
-	cactus_timer.start(randf_range(cactus_timer_minimum, cactus_timer_minimum + 2))
+	cactus_timer.start(randf_range(cactus_time, 2 * cactus_time + 1))
 
 
 func _on_ice_cube_timer_timeout() -> void:
@@ -34,7 +44,7 @@ func _on_ice_cube_timer_timeout() -> void:
 	new_ice_cube.collected.connect(_on_ice_cube_collected)
 	new_ice_cube.position = spawn_marker.position + Vector2(0, randi_range(-50, -150))
 	add_child(new_ice_cube)
-	ice_cube_timer.start(randf_range(ice_cube_timer_minimum, ice_cube_timer_minimum + 1))
+	ice_cube_timer.start(randf_range(ice_cube_time, ice_cube_time + 1))
 
 
 func _on_ice_cube_collected() -> void:
@@ -49,3 +59,40 @@ func start_spawning() -> void:
 func stop_spawning() -> void:
 	cactus_timer.stop()
 	ice_cube_timer.stop()
+
+
+func start_scroll() -> void:
+	for tween in tweens:
+		tween.kill()
+	var scroll_values: Array[int] = [
+		-20,
+		-30,
+		-40,
+		-60,
+		-100,
+	]
+	var parallaxLayers = backgrounds.get_children()
+	for item in parallaxLayers:
+		if item is Parallax2D:
+			item.autoscroll.x = scroll_values.pop_front()
+
+
+func end_scroll() -> void:
+	var parallaxLayers = backgrounds.get_children()
+	for item in parallaxLayers:
+		if item is Parallax2D:
+			item.autoscroll.x = 0
+
+
+func slow_scroll() -> void:
+	var parallaxLayers = backgrounds.get_children()
+	for item in parallaxLayers:
+		if item is Parallax2D:
+			var new_tween = create_tween()
+			new_tween.tween_property(item, "autoscroll:x", 0, 2)
+			tweens.append(new_tween)
+
+
+func restart_values() -> void:
+	speed = BASELINE_SPEED
+	cactus_time = BASELINE_CACTUS_TIME

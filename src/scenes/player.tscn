@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cw7drtbk48xxm" path="res://src/scripts/player.gd" id="1_v4rts"]
 [ext_resource type="Texture2D" uid="uid://buusbph21das7" path="res://resources/spritesheet.png" id="2_v4rts"]
-[ext_resource type="AudioStream" uid="uid://dxo4ap4pqp7h8" path="res://resources/sounds/jump.ogg" id="3_hwyk6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwyk6"]
 atlas = ExtResource("2_v4rts")
@@ -99,6 +98,36 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4rts"]
 size = Vector2(32, 57)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4rts"]
+radius = 12.0
+height = 38.0
+
+[sub_resource type="Gradient" id="Gradient_v4rts"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hwyk6"]
+gradient = SubResource("Gradient_v4rts")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v4rts"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.66
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 121.63
+initial_velocity_max = 161.62999
+gravity = Vector3(0, 500, 0)
+linear_accel_min = -150.0
+linear_accel_max = -150.0
+scale_min = 0.0
+scale_max = 2.0
+
 [node name="Player" type="CharacterBody2D" unique_id=2135155359]
 script = ExtResource("1_v4rts")
 
@@ -113,16 +142,23 @@ frame_progress = 0.6408936
 position = Vector2(0, -29)
 shape = SubResource("RectangleShape2D_v4rts")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=378018722]
+[node name="HitBox" type="Area2D" parent="." unique_id=378018722]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=484020901]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=484020901]
 position = Vector2(0, -29)
-shape = SubResource("RectangleShape2D_v4rts")
+shape = SubResource("CapsuleShape2D_v4rts")
 
-[node name="Jump" type="AudioStreamPlayer" parent="." unique_id=598231984]
-stream = ExtResource("3_hwyk6")
-volume_db = -13.582
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=404406455]
+position = Vector2(1, -43)
+emitting = false
+amount = 10
+texture = SubResource("GradientTexture2D_hwyk6")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_v4rts")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_area_2d_body_entered"]

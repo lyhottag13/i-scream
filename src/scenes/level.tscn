@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://uyrw6sbde0d3" path="res://resources/background/3bunuelodetail.png" id="6_g67j4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wq10o"]
-size = Vector2(1190, 47)
+size = Vector2(337, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e32pt"]
 size = Vector2(20, 211)
@@ -20,11 +20,52 @@ size = Vector2(126, 206.5)
 [node name="Level" type="Node2D" unique_id=1585518691]
 script = ExtResource("1_7racn")
 
+[node name="Backgrounds" type="Node2D" parent="." unique_id=1316074010]
+
+[node name="Sky" type="Sprite2D" parent="Backgrounds" unique_id=1150391898]
+texture = ExtResource("2_e32pt")
+centered = false
+
+[node name="Mountains" type="Parallax2D" parent="Backgrounds" unique_id=77997172]
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Mountains" unique_id=1887015854]
+texture = ExtResource("3_hkhm5")
+centered = false
+
+[node name="Cinammon" type="Parallax2D" parent="Backgrounds" unique_id=130884253]
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Cinammon" unique_id=610180878]
+texture = ExtResource("2_w1iog")
+centered = false
+
+[node name="Churros" type="Parallax2D" parent="Backgrounds" unique_id=1503822287]
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Churros" unique_id=772263293]
+texture = ExtResource("5_g7mpk")
+centered = false
+
+[node name="Bunelo" type="Parallax2D" parent="Backgrounds" unique_id=1369094169]
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Bunelo" unique_id=227637321]
+texture = ExtResource("6_g67j4")
+centered = false
+
+[node name="Sand" type="Parallax2D" parent="Backgrounds" unique_id=1179912931]
+repeat_size = Vector2(320, 0)
+
+[node name="TextureRect" type="Sprite2D" parent="Backgrounds/Sand" unique_id=865879242]
+texture = ExtResource("2_7racn")
+centered = false
+
 [node name="Floor" type="StaticBody2D" parent="." unique_id=827513076]
 position = Vector2(-225, 173)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=445182400]
-position = Vector2(585, 13.5)
+position = Vector2(388.5, 15.5)
 shape = SubResource("RectangleShape2D_wq10o")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor" unique_id=1934811265]
@@ -37,7 +78,7 @@ shape = SubResource("RectangleShape2D_hkhm5")
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=1587892575]
 unique_name_in_owner = true
-position = Vector2(345, 163)
+position = Vector2(345, 169)
 
 [node name="Timers" type="Node" parent="." unique_id=2143350176]
 
@@ -46,52 +87,6 @@ unique_name_in_owner = true
 
 [node name="IceCubeTimer" type="Timer" parent="Timers" unique_id=144561989]
 unique_name_in_owner = true
-
-[node name="Backgrounds" type="Node2D" parent="." unique_id=1316074010]
-
-[node name="Sky" type="Sprite2D" parent="Backgrounds" unique_id=1150391898]
-texture = ExtResource("2_e32pt")
-centered = false
-
-[node name="Mountains" type="Parallax2D" parent="Backgrounds" unique_id=77997172]
-repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-20, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Mountains" unique_id=1887015854]
-texture = ExtResource("3_hkhm5")
-centered = false
-
-[node name="Cinammon" type="Parallax2D" parent="Backgrounds" unique_id=130884253]
-repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-30, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Cinammon" unique_id=610180878]
-texture = ExtResource("2_w1iog")
-centered = false
-
-[node name="Churros" type="Parallax2D" parent="Backgrounds" unique_id=1503822287]
-repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-40, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Churros" unique_id=772263293]
-texture = ExtResource("5_g7mpk")
-centered = false
-
-[node name="Bunelo" type="Parallax2D" parent="Backgrounds" unique_id=1369094169]
-repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-60, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Bunelo" unique_id=227637321]
-texture = ExtResource("6_g67j4")
-centered = false
-
-[node name="Sand" type="Parallax2D" parent="Backgrounds" unique_id=1179912931]
-repeat_size = Vector2(320, 0)
-autoscroll = Vector2(-100, 0)
-
-[node name="TextureRect" type="Sprite2D" parent="Backgrounds/Sand" unique_id=865879242]
-texture = ExtResource("2_7racn")
-centered = false
 
 [connection signal="timeout" from="Timers/CactusTimer" to="." method="_on_cactus_timer_timeout"]
 [connection signal="timeout" from="Timers/IceCubeTimer" to="." method="_on_ice_cube_timer_timeout"]
