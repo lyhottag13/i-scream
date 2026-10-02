@@ -33,10 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Bar" parent="GUI" unique_id=1345024408 instance=ExtResource("4_m7syd")]
-visible = false
 layout_mode = 1
-offset_left = -21.0
-offset_right = -11.0
+offset_left = -50.0
+offset_right = -50.0
 
 [node name="Score" type="Label" parent="GUI" unique_id=366462545]
 unique_name_in_owner = true
@@ -76,6 +75,8 @@ layout_mode = 1
 
 [node name="ScoreTimer" type="Timer" parent="." unique_id=1679420607]
 wait_time = 0.1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1894567569]
 
 [connection signal="collected" from="World/Level" to="." method="_on_level_collected"]
 [connection signal="hit" from="World/Player" to="." method="_on_player_hit"]
