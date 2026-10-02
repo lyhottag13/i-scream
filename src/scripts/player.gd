@@ -7,6 +7,7 @@ const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
 @onready var particles: CPUParticles2D = $Particles
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
 	# Prevents player control if the game isn't running.
@@ -45,3 +46,11 @@ func die() -> void:
 	hide()
 	particles.restart()
 	queue_free()
+
+
+func run() -> void:
+	animated_sprite_2d.animation = "running"
+
+
+func idle() -> void:
+	animated_sprite_2d.animation = "idle"

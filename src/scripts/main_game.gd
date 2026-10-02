@@ -25,7 +25,7 @@ var score := 0
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
+	if event is InputEventKey and DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 
@@ -67,6 +67,9 @@ func _start_game() -> void:
 	level.start_spawning()
 	level.start_scroll()
 	level.restart_values()
+	
+	player.run()
+	
 	score = 0
 	score_label.text = "Score: 0"
 	score_timer.start()
@@ -74,6 +77,7 @@ func _start_game() -> void:
 	bar_ratio = 1
 	score_label.show()
 	tutorial.position.x = 500
+	create_tween().tween_property(score_label, "position:x", 9, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	create_tween().tween_property(bar, "position:x", 0, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	create_tween().tween_property(tutorial, "position:x", -300, 3).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_CUBIC)
 
@@ -85,6 +89,7 @@ func _end_game() -> void:
 	level.stop_spawning()
 	score_timer.stop()
 	player.die()
+	create_tween().tween_property(score_label, "position:x", -67, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	create_tween().tween_property(bar, "position:x", -50, 1)
 	await get_tree().create_timer(1.0).timeout
 	background_music.stream = CALM_MUSIC

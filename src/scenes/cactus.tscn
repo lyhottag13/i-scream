@@ -2,61 +2,32 @@
 
 [ext_resource type="Script" uid="uid://bxw7i5dvv5sfp" path="res://src/scripts/cactus.gd" id="1_vannn"]
 [ext_resource type="Texture2D" uid="uid://cx2rfgsx8quwf" path="res://resources/churro_cactus.png" id="2_5m7l5"]
-[ext_resource type="Texture2D" uid="uid://dv3nu6dp4tvir" path="res://resources/cactus_1.png" id="2_vannn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mtqtt"]
-atlas = ExtResource("2_5m7l5")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5m7l5"]
-atlas = ExtResource("2_vannn")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2sag"]
-atlas = ExtResource("2_vannn")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mtqtt"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mtqtt")
-}],
-"loop": true,
-"name": &"cactus",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5m7l5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y2sag")
-}],
-"loop": true,
-"name": &"cactus_1",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://bdu2tbr5kqmji" path="res://resources/churro_cactus_tall.png" id="3_5m7l5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vannn"]
 radius = 12.0
-height = 128.0
+height = 64.0
 
 [node name="Cactus" type="StaticBody2D" unique_id=915071557 groups=["moving_objects"]]
 collision_layer = 2
 script = ExtResource("1_vannn")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=264982551]
-position = Vector2(0, -32)
-sprite_frames = SubResource("SpriteFrames_mtqtt")
-animation = &"cactus"
-autoplay = "cactus"
+[node name="Cactus1" type="Sprite2D" parent="." unique_id=2034567420]
+visible = false
+texture = ExtResource("2_5m7l5")
+offset = Vector2(0, -32)
+
+[node name="Cactus2" type="Sprite2D" parent="." unique_id=1865333158]
+visible = false
+texture = ExtResource("3_5m7l5")
+offset = Vector2(0, -48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2118581996]
+position = Vector2(0, -32)
 shape = SubResource("CapsuleShape2D_vannn")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=908456380]
-position = Vector2(-18, -10)
-rect = Rect2(-10, -54, 56, 64)
+position = Vector2(-12, -10)
+rect = Rect2(-10, -88, 56, 98)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

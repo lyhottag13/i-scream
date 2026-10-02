@@ -52,8 +52,8 @@ func _on_ice_cube_collected() -> void:
 
 
 func start_spawning() -> void:
-	cactus_timer.start(randf_range(1, 3))
-	ice_cube_timer.start(randf_range(1, 3))
+	cactus_timer.start(3)
+	ice_cube_timer.start(3.5)
 
 
 func stop_spawning() -> void:
