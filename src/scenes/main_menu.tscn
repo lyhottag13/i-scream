@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ctk1novde5cc8" path="res://src/scripts/main_menu.gd" id="1_rm437"]
 [ext_resource type="Texture2D" uid="uid://dvix4puwxljrk" path="res://resources/run_button.png" id="2_rkeyg"]
 [ext_resource type="Texture2D" uid="uid://bhoasl4jcpxdn" path="res://resources/run_hover.png" id="3_iaawh"]
+[ext_resource type="Texture2D" uid="uid://cfvsy8abjuqlx" path="res://resources/logo.png" id="4_iaawh"]
 
 [node name="MainMenu" type="Control" unique_id=1559335009]
 layout_mode = 3
@@ -13,18 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rm437")
 
-[node name="Title" type="Label" parent="." unique_id=1214807601]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.0
-offset_top = 28.0
-offset_right = 34.0
-offset_bottom = 51.0
-grow_horizontal = 2
-text = "I-Scream"
-
 [node name="Button" type="TextureButton" parent="." unique_id=657027009]
 layout_mode = 1
 anchors_preset = 7
@@ -33,9 +22,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -32.0
-offset_top = -64.0
+offset_top = -52.0
 offset_right = 32.0
-offset_bottom = -32.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -44,5 +33,19 @@ focus_behavior_recursive = 1
 texture_normal = ExtResource("2_rkeyg")
 texture_hover = ExtResource("3_iaawh")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=58766896]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 2.0
+offset_right = 64.0
+offset_bottom = 130.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_iaawh")
+
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

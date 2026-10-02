@@ -58,8 +58,10 @@ offset_right = 32.0
 offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture_normal = ExtResource("3_w4mf3")
 texture_hover = ExtResource("4_bmgmc")
 
 [connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_button_pressed"]

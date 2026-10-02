@@ -25,11 +25,12 @@ var score := 0
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if event is InputEventKey and DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 
 
 func _ready() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	background_music.stream = CALM_MUSIC
 	background_music.play()
 
